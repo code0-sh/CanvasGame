@@ -1,0 +1,20 @@
+$bg-color: #ecf0f1;
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.canvas {
+  background: $bg-color;
+  display: block;
+}
