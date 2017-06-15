@@ -1,8 +1,15 @@
+// @flow
 import { canvas } from './DOM';
 import { RADIUS, V } from './Constant';
 import { gameState } from './GameState';
+import Ball from './Ball';
 
 export default class TouchManager {
+  ball: Ball;
+  startX: number;
+  startY: number;
+  endX: number;
+  endY: number;
   constructor() {
     this.ball = null; // 選択されたボール
     this.startX = 0;
@@ -10,8 +17,7 @@ export default class TouchManager {
     this.endX = 0;
     this.endY = 0;
   }
-
-  setStartPosition(e) {
+  setStartPosition(e: any) {
     let rect = e.target.getBoundingClientRect();
     let touchX =
       (e.changedTouches[0].clientX - rect.left) /
@@ -24,7 +30,7 @@ export default class TouchManager {
     this.startY = touchY;
   }
 
-  setEndPosition(e) {
+  setEndPosition(e: any) {
     let rect = e.target.getBoundingClientRect();
     let touchX =
       (e.changedTouches[0].clientX - rect.left) /
@@ -55,7 +61,7 @@ export default class TouchManager {
     return y / r * V;
   }
 
-  onCanvasTouchStart(e) {
+  onCanvasTouchStart(e: any) {
     e.preventDefault();
     //stop();
     for (var i = 0; i < gameState.balls.length; i++) {
@@ -73,11 +79,11 @@ export default class TouchManager {
     }
   }
 
-  onCanvasTouchMove(e) {
+  onCanvasTouchMove(e: any) {
     e.preventDefault();
   }
 
-  onCanvasTouchEnd(e) {
+  onCanvasTouchEnd(e: any) {
     e.preventDefault();
     if (this.ball) {
       this.setEndPosition(e);
@@ -90,7 +96,7 @@ export default class TouchManager {
     }
   }
 
-  isTouchPointExistsInCircle(e, x, y) {
+  isTouchPointExistsInCircle(e: any, x: number, y: number) {
     let rect = e.target.getBoundingClientRect();
     let touchX =
       (e.changedTouches[0].clientX - rect.left) /
@@ -99,6 +105,9 @@ export default class TouchManager {
       (e.changedTouches[0].clientY - rect.top) /
       (canvas.offsetHeight / canvas.height);
 
-    return (touchX - x) * (touchX - x) + (touchY - y) * (touchY - y) < RADIUS * RADIUS;
+    return (
+      (touchX - x) * (touchX - x) + (touchY - y) * (touchY - y) <
+      RADIUS * RADIUS
+    );
   }
 }

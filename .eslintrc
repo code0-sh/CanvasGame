@@ -1,7 +1,11 @@
 {
   "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+  },
   "plugins": [
-    "prettier"
+    "prettier",
+    "flowtype"
   ],
   "extends": [
     "prettier",

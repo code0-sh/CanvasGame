@@ -1,3 +1,4 @@
+// @flow
 import Pitch from './Pitch';
 import { container, canvas, ctx } from './DOM';
 import { HOME_BALL_IMAGE, AWAY_BALL_IMAGE } from './Constant';
@@ -6,10 +7,13 @@ import { gameState } from './GameState';
 import TouchManager from './TouchManager';
 
 export default class Screen {
+  intervalAnimationID: number;
+  intervalCreateID: number;
+  pitch: Pitch;
   constructor() {
     // Canvasのサイズを変更する
-    this.intervalAnimationID = null;
-    this.intervalCreateID = null;
+    this.intervalAnimationID = 0;
+    this.intervalCreateID = 0;
     this.pitch = new Pitch();
 
     this.sizing();
@@ -36,7 +40,7 @@ export default class Screen {
       self.update();
     }, 30);
   }
-  imageLoader(loadedCount, callback) {
+  imageLoader(loadedCount: number, callback: Function) {
     let count = 0;
     return function() {
       count++;
