@@ -1,18 +1,19 @@
 import { canvas, ctx } from './DOM';
+import { PITCH_COLOR, PITCH_LINE_COLOR } from './Constant';
 
 export default class Pitch {
   draw() {
     // Outer lines
     ctx.beginPath();
     ctx.rect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#060';
+    ctx.fillStyle = PITCH_COLOR;
     ctx.fill();
     ctx.lineWidth = 1;
-    ctx.strokeStyle = '#FFF';
+    ctx.strokeStyle = PITCH_LINE_COLOR;
     ctx.stroke();
     ctx.closePath();
 
-    ctx.fillStyle = '#FFF';
+    ctx.fillStyle = PITCH_LINE_COLOR;
 
     // Mid line
     ctx.beginPath();

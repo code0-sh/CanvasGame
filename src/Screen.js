@@ -1,8 +1,16 @@
 // @flow
 import Pitch from './Pitch';
 import { container, canvas, ctx } from './DOM';
-import { HOME_BALL_IMAGE, AWAY_BALL_IMAGE } from './Constant';
+import {
+  HOME_BALL_IMAGE,
+  AWAY_BALL_IMAGE,
+  GOAL_LEFT_TOP_IMAGE,
+  GOAL_RIGHT_TOP_IMAGE,
+  GOAL_LEFT_BOTTOM_IMAGE,
+  GOAL_RIGHT_BOTTOM_IMAGE
+} from './Constant';
 import Ball from './Ball';
+import Goal from './Goal';
 import { gameState } from './GameState';
 import TouchManager from './TouchManager';
 
@@ -10,11 +18,13 @@ export default class Screen {
   intervalAnimationID: number;
   intervalCreateID: number;
   pitch: Pitch;
+  goal: Goal;
   constructor() {
     // Canvasのサイズを変更する
     this.intervalAnimationID = 0;
     this.intervalCreateID = 0;
     this.pitch = new Pitch();
+    this.goal = new Goal();
 
     this.sizing();
   }
@@ -23,6 +33,7 @@ export default class Screen {
     canvas.height = container.offsetHeight;
     canvas.width = container.offsetWidth;
     this.pitch.draw();
+    this.goal.draw();
   }
   clearstage() {
     ctx.fillStyle = '#ecf0f1';
@@ -31,6 +42,7 @@ export default class Screen {
   update() {
     this.clearstage();
     this.pitch.draw();
+    this.goal.draw();
     for (var i = 0; i < gameState.balls.length; i++) {
       gameState.balls[i].draw();
       gameState.balls[i].move();
@@ -51,7 +63,7 @@ export default class Screen {
   }
   startGame() {
     let self = this;
-    let onload = this.imageLoader(2, function() {
+    let onload = this.imageLoader(6, function() {
       console.log('All images loaded!');
       // ボールを生成する
       Ball.create();
@@ -65,6 +77,10 @@ export default class Screen {
 
     HOME_BALL_IMAGE.onload = onload;
     AWAY_BALL_IMAGE.onload = onload;
+    GOAL_LEFT_TOP_IMAGE.onload = onload;
+    GOAL_RIGHT_TOP_IMAGE.onload = onload;
+    GOAL_LEFT_BOTTOM_IMAGE.onload = onload;
+    GOAL_RIGHT_BOTTOM_IMAGE.onload = onload;
     this.bindEvent();
   }
   bindEvent() {

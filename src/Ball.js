@@ -36,7 +36,7 @@ export default class Ball {
         break;
       default:
     }
-    ctx.drawImage(image, this.x, this.y, 50, 50);
+    ctx.drawImage(image, this.x, this.y, RADIUS, RADIUS);
   }
   move() {
     //跳ね返り処理
