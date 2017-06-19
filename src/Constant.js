@@ -19,6 +19,7 @@ const GOAL_ROTATE_CENTER_Y = 150; // ゴールの回転の中心座標Y
 export const GOAL_WIDTH = 200; // ゴールの幅
 export const GOAL_HEIGHT = 200; // ゴールの高さ
 
+export const PITCH_MARGIN = 70; // グラウンドとピッチのマージン
 export const PITCH_COLOR = 'rgb(0, 102, 0)'; // ピッチのカラー
 export const PITCH_LINE_COLOR = 'rgb(255, 255, 255)'; // ピッチラインのカラー
 
